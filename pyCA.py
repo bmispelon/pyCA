@@ -128,8 +128,8 @@ if __name__ == '__main__':
     from optparse import OptionParser
     from getpass import getpass
     p = OptionParser()
-    p.add_option('-u', '--username', help="Le numéro du compte utilisé pour se connecter", dest='username')
-    p.add_option('-p', '--password', help="Le mot de passe à 6 chiffres", dest='password')
+    p.add_option('-u', '--username', help=u"Le numéro du compte utilisé pour se connecter", dest='username')
+    p.add_option('-p', '--password', help=u"Le mot de passe à 6 chiffres", dest='password')
     options, args = p.parse_args()
     
     username = options.username or raw_input('Numéro de compte :')
