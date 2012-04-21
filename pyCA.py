@@ -15,15 +15,9 @@ class CreditAgricoleParser():
     def get_login_page(self):
         """Renvoie le code source HTML de la page contenant le formulaire d'authentification."""
         data= {
-            'TOP_ORIGINE':'V',
-            'vitrine':'0',
-            'largeur_ecran':'800',
-            'hauteur_ecran':'600',
-            'origine':'vitrine',
-            'situationTravail':'BANQUAIRE',
-            'canal':'WEB',
-            'typeAuthentification':'CLIC_ALLER',
-            'urlOrigine':'http://www.ca-norddefrance.fr'
+            'origine': 'vitrine',
+            'situationTravail': 'BANQUAIRE',
+            'canal': 'WEB',
         }
         return self.session.post(self.AUTH_FORM_TARGET, data=data).content
     
