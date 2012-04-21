@@ -11,13 +11,6 @@ class CreditAgricoleParser():
 
     def __init__(self):
         self.session = requests.session(verify=True)
-    
-    def get_page(self, url, data=None):
-        if data is None:
-            response = self.session.get(url)
-        else:
-            response = self.session.post(url, data=data)
-        return response.content
 
     def get_login_page(self):
         """Renvoie le code source HTML de la page contenant le formulaire d'authentification."""
@@ -32,7 +25,7 @@ class CreditAgricoleParser():
             'typeAuthentification':'CLIC_ALLER',
             'urlOrigine':'http://www.ca-norddefrance.fr'
         }
-        return self.get_page(self.AUTH_FORM_TARGET, data=data)
+        return self.session.post(self.AUTH_FORM_TARGET, data=data).content
     
     
     def get_trans_dict(self, login_page_source):
@@ -71,7 +64,7 @@ class CreditAgricoleParser():
 
     def get_landing_page(self, login_post_data):
         """Retourne le code source de la page d'accueil une fois l'utilisateur authentifié."""
-        return self.get_page(self.AUTH_FORM_TARGET, login_post_data)
+        return self.session.post(self.AUTH_FORM_TARGET, data=login_post_data).content
     
 
     def get_balance(self, landing_page_source):
