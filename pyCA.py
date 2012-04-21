@@ -10,7 +10,7 @@ class CreditAgricoleParser():
     AUTH_FORM_TARGET = 'https://www.cr867-comete-g2-enligne.credit-agricole.fr/stb/entreeBam'
 
     def __init__(self):
-        self.session = requests.session()
+        self.session = requests.session(verify=True)
     
     def get_page(self, url, data=None):
         if data is None:
