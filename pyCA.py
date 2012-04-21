@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
+from getpass import getpass
 from lxml import html
 import requests
 
@@ -91,17 +92,26 @@ class CreditAgricoleParser():
         
 
 
+def is_valid_pin(pin):
+    """Validate that the PIN is 6 character long and contains only digits."""
+    return pin and len(pin) == 6 and pin.isdigit()
+
+def input_pin(prompt='Mot de passe :'):
+    pin = None
+    while not is_valid_pin(pin):
+        pin = getpass(prompt)
+    return pin
+
 #exemple basique d'utilisation:
 if __name__ == '__main__':
     from optparse import OptionParser
-    from getpass import getpass
     p = OptionParser()
     p.add_option('-u', '--username', help=u"Le numéro du compte utilisé pour se connecter", dest='username')
     p.add_option('-p', '--password', help=u"Le mot de passe à 6 chiffres", dest='password')
     options, args = p.parse_args()
     
     username = options.username or raw_input('Numéro de compte :')
-    password = options.password or getpass('Mot de passe :')
+    password = options.password or input_pin()
 
     h = CreditAgricoleParser()
     
